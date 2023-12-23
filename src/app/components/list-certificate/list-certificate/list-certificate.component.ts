@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogTitle,
-  MatDialogContent,
-  MatDialogActions,
-  MatDialogClose,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CertificateComponent } from '../certificate/certificate.component';
 import { NewCertificateComponent } from '../new-certificate/new-certificate.component';
 
@@ -27,9 +19,8 @@ export interface DialogData {
 @Component({
   selector: 'app-list-certificate',
   templateUrl: './list-certificate.component.html',
-  styleUrls: ['./list-certificate.component.css']
+  styleUrls: ['./list-certificate.component.css'],
 })
-
 export class ListCertificateComponent implements OnInit {
   public name?: string;
   public email?: string;
@@ -38,20 +29,18 @@ export class ListCertificateComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   openCertificate() {
     this.dialog.open(CertificateComponent, {
-      data: {name: this.name, email: this.email},
+      data: { name: this.name, email: this.email },
     });
-
   }
 
   openNewCertificate() {
     const dialogRef = this.dialog.open(NewCertificateComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.name = result.name;
       this.email = result.email;
       this.dataSource.push(result);
